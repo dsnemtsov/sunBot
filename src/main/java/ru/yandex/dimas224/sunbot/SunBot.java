@@ -5,14 +5,17 @@ import org.telegram.telegrambots.bots.TelegramWebhookBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import ru.yandex.dimas224.sunbot.botapi.TelegramFacade;
 
 public class SunBot extends TelegramWebhookBot {
   private String webHookPath;
   private String botUserName;
   private String botToken;
+  private final TelegramFacade telegramFacade;
 
-  public SunBot(DefaultBotOptions botOptions) {
+  public SunBot(DefaultBotOptions botOptions, TelegramFacade telegramFacade) {
     super(botOptions);
+    this.telegramFacade = telegramFacade;
   }
 
   @Override
@@ -30,19 +33,6 @@ public class SunBot extends TelegramWebhookBot {
     return webHookPath;
   }
 
-  @Override
-  public BotApiMethod<?> onWebhookUpdateReceived(Update update) {
-    if (update.hasMessage() && update.getMessage().hasText()) {
-
-      SendMessage sendMessage = new SendMessage();
-      sendMessage.setChatId(update.getMessage().getChatId().toString());
-      sendMessage.setText("Ответ");
-
-      return sendMessage;
-    }
-    return null;
-  }
-
   public void setWebHookPath(String webHookPath) {
     this.webHookPath = webHookPath;
   }
@@ -53,5 +43,10 @@ public class SunBot extends TelegramWebhookBot {
 
   public void setBotToken(String botToken) {
     this.botToken = botToken;
+  }
+
+  @Override
+  public BotApiMethod<?> onWebhookUpdateReceived(Update update) {
+    return telegramFacade.handleUpdate(update);
   }
 }
