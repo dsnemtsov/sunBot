@@ -1,0 +1,7 @@
+server:
+  port: 5000
+
+telegrambot:
+  userName: "@via_sun_bot"
+  botToken: "5266180178:AAGYFl3E3IsGxvyMgP736eSfqpZIF0DqzCM"
+  webHookPath: "https://5953-5-18-187-89.eu.ngrok.io"
