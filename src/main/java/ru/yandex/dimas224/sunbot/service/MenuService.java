@@ -62,21 +62,48 @@ public class MenuService {
     return inlineKeyboardMarkup;
   }
 
+  public InlineKeyboardMarkup getTexts() {
+    InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+
+    InlineKeyboardButton dream = new InlineKeyboardButton("Dream");
+
+    dream.setCallbackData("dream");
+
+    List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
+    keyboardButtonsRow1.add(dream);
+
+    List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
+    rowList.add(keyboardButtonsRow1);
+
+    inlineKeyboardMarkup.setKeyboard(rowList);
+
+    return inlineKeyboardMarkup;
+  }
+
   public InlineKeyboardMarkup getTheoryMaterials() {
     InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
     InlineKeyboardButton intervals = new InlineKeyboardButton("Интервалы");
     InlineKeyboardButton scales = new InlineKeyboardButton("Гаммы");
+    InlineKeyboardButton razminka = new InlineKeyboardButton("Сумасшедшая разминка");
+    InlineKeyboardButton texts = new InlineKeyboardButton("Тексты");
 
     intervals.setCallbackData("intervals");
     scales.setCallbackData("scales");
+    razminka.setCallbackData("razminka");
+    texts.setCallbackData("texts");
 
     List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
     keyboardButtonsRow1.add(intervals);
     keyboardButtonsRow1.add(scales);
+    keyboardButtonsRow1.add(texts);
+
+    List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList<>();
+    keyboardButtonsRow2.add(razminka);
 
     List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
     rowList.add(keyboardButtonsRow1);
+    rowList.add(keyboardButtonsRow2);
 
     inlineKeyboardMarkup.setKeyboard(rowList);
 

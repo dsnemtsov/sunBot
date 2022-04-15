@@ -1,5 +1,7 @@
 package ru.yandex.dimas224.sunbot.botapi;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -32,7 +34,6 @@ public class TelegramFacade {
     this.sunBot = sunBot;
 
     menu.put("/members", this::getMembers);
-    //menu.put("/scales", this::getScales);
     menu.put("/data", this::getTheoryData);
     menu.put("/card_number", message -> messagesService.getReplyMessage(message.getChatId().toString(), "reply.cardNumber"));
     menu.put("/concert", message -> messagesService.getReplyMessage(message.getChatId().toString(), "reply.concertInfo"));
@@ -42,6 +43,19 @@ public class TelegramFacade {
     callbacks.put("roma", chatId -> messagesService.getReplyMessage(chatId, "reply.roma"));
     callbacks.put("olga", chatId -> messagesService.getReplyMessage(chatId, "reply.olga"));
     callbacks.put("dima", chatId -> messagesService.getReplyMessage(chatId, "reply.dima"));
+    callbacks.put("razminka", chatId -> messagesService.getReplyMessage(chatId, "reply.razminka"));
+    callbacks.put("scales", this::getScales);
+    callbacks.put("texts", this::getTexts);
+    //callbacks.put("dream", );
+  }
+
+  @SneakyThrows
+  private SendMessage getSongText(String chatId, String s) {
+    Path filePath = Path.of("src/main/resources/static/text/" + s);
+
+    String content = Files.readString(filePath);
+
+    return new SendMessage(chatId, content);
   }
 
   public BotApiMethod<?> handleUpdate(Update update) {
@@ -81,11 +95,10 @@ public class TelegramFacade {
       sunBot.sendAudio(chatId, "static/audio/liamin.mp3");
     } else if (buttonQuery.getData().equals("intervals")) {
       sunBot.sendPhoto(chatId, "static/image/intervals.jpg");
-    } else if (buttonQuery.getData().equals("scales")) {
-      SendMessage replyMessage = messagesService.getReplyMessage(chatId, "reply.scales");
-      replyMessage.setReplyMarkup(menuService.getScales());
-      return replyMessage;
+    } else if (buttonQuery.getData().equals("dream")) {
+      return getSongText(chatId, "Dream.txt");
     }
+
     return callbacks.getOrDefault(buttonQuery.getData(), a -> (new SendMessage())).apply(chatId);
   }
 
@@ -95,9 +108,15 @@ public class TelegramFacade {
     return replyMessage;
   }
 
-  private SendMessage getScales(Message message) {
-    SendMessage replyMessage = messagesService.getReplyMessage(message.getChatId().toString(), "reply.scales");
+  private SendMessage getScales(String chatId) {
+    SendMessage replyMessage = messagesService.getReplyMessage(chatId, "reply.scales");
     replyMessage.setReplyMarkup(menuService.getScales());
+    return replyMessage;
+  }
+
+  private SendMessage getTexts(String chatId) {
+    SendMessage replyMessage = messagesService.getReplyMessage(chatId, "reply.texts");
+    replyMessage.setReplyMarkup(menuService.getTexts());
     return replyMessage;
   }
 
