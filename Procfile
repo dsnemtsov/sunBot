@@ -1,1 +1,1 @@
-web: java -jar target/sunBotCustom-0.0.1-SNAPSHOT.jar
+web: java -jar build/libs/sunBotCustom-0.0.1-SNAPSHOT.jar
