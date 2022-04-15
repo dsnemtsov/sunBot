@@ -34,13 +34,13 @@ public class TelegramFacade {
     menu.put("/members", this::getMembers);
     menu.put("/scales", this::getScales);
     menu.put("/card_number", message -> messagesService.getReplyMessage(message.getChatId().toString(), "reply.cardNumber"));
+    menu.put("/concert", message -> messagesService.getReplyMessage(message.getChatId().toString(), "reply.concertInfo"));
 
     callbacks.put("liza", chatId -> messagesService.getReplyMessage(chatId, "reply.liza"));
     callbacks.put("lena", chatId -> messagesService.getReplyMessage(chatId, "reply.lena"));
     callbacks.put("roma", chatId -> messagesService.getReplyMessage(chatId, "reply.roma"));
     callbacks.put("olga", chatId -> messagesService.getReplyMessage(chatId, "reply.olga"));
     callbacks.put("dima", chatId -> messagesService.getReplyMessage(chatId, "reply.dima"));
-    //callbacks.put("doMajor", chatId -> );
   }
 
   public BotApiMethod<?> handleUpdate(Update update) {
