@@ -61,4 +61,22 @@ public class MenuService {
 
     return inlineKeyboardMarkup;
   }
+
+  public InlineKeyboardMarkup getTheoryMaterials() {
+    InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+
+    InlineKeyboardButton intervals = new InlineKeyboardButton("Интервалы");
+
+    intervals.setCallbackData("intervals");
+
+    List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
+    keyboardButtonsRow1.add(intervals);
+
+    List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
+    rowList.add(keyboardButtonsRow1);
+
+    inlineKeyboardMarkup.setKeyboard(rowList);
+
+    return inlineKeyboardMarkup;
+  }
 }

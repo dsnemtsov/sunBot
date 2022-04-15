@@ -33,6 +33,7 @@ public class TelegramFacade {
 
     menu.put("/members", this::getMembers);
     menu.put("/scales", this::getScales);
+    menu.put("/data", this::getTheoryData);
     menu.put("/card_number", message -> messagesService.getReplyMessage(message.getChatId().toString(), "reply.cardNumber"));
     menu.put("/concert", message -> messagesService.getReplyMessage(message.getChatId().toString(), "reply.concertInfo"));
 
@@ -78,6 +79,8 @@ public class TelegramFacade {
     } else if (buttonQuery.getData().equals("liaMinor")) {
       sunBot.sendPhoto(chatId, "static/image/liamin.jpg");
       sunBot.sendAudio(chatId, "static/audio/liamin.mp3");
+    } else if (buttonQuery.getData().equals("intervals")) {
+      sunBot.sendPhoto(chatId, "static/image/intervals.jpg");
     }
     return callbacks.getOrDefault(buttonQuery.getData(), a -> (new SendMessage())).apply(chatId);
   }
@@ -91,6 +94,12 @@ public class TelegramFacade {
   private SendMessage getScales(Message message) {
     SendMessage replyMessage = messagesService.getReplyMessage(message.getChatId().toString(), "reply.scales");
     replyMessage.setReplyMarkup(menuService.getScales());
+    return replyMessage;
+  }
+
+  private SendMessage getTheoryData(Message message) {
+    SendMessage replyMessage = messagesService.getReplyMessage(message.getChatId().toString(), "reply.theoryData");
+    replyMessage.setReplyMarkup(menuService.getTheoryMaterials());
     return replyMessage;
   }
 }
