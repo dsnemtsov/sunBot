@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT build/libs/sunBotCustom-0.0.1-SNAPSHOT.jar
+web: java -jar build/libs/java-getting-started-1.0.jar
