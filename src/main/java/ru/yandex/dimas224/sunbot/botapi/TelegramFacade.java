@@ -3,6 +3,7 @@ package ru.yandex.dimas224.sunbot.botapi;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -68,11 +69,15 @@ public class TelegramFacade {
     return menu.getOrDefault(inputMsg, a -> (new SendMessage())).apply(message);
   }
 
+  @SneakyThrows
   private BotApiMethod<?> processCallbackQuery(CallbackQuery buttonQuery) {
     final String chatId = buttonQuery.getMessage().getChatId().toString();
     if (buttonQuery.getData().equals("doMajor")) {
-      sunBot.sendPhoto(chatId, "Гамма до-мажор","static/image/domaj.jpg");
-      sunBot.sendAudio(chatId, "Гамма до-мажор", "static/audio/domaj.mp3");
+      sunBot.sendPhoto(chatId, "static/image/domaj.jpg");
+      sunBot.sendAudio(chatId, "static/audio/domaj.mp3");
+    } else if (buttonQuery.getData().equals("liaMinor")) {
+      sunBot.sendPhoto(chatId, "static/image/liamin.jpg");
+      sunBot.sendAudio(chatId, "static/audio/liamin.mp3");
     }
     return callbacks.getOrDefault(buttonQuery.getData(), a -> (new SendMessage())).apply(chatId);
   }

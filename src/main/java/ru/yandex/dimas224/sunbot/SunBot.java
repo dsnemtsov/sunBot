@@ -58,24 +58,23 @@ public class SunBot extends TelegramWebhookBot {
   }
 
   @SneakyThrows
-  public void sendAudio(String chatId, String caption, String audioPath) {
+  public void sendAudio(String chatId, String audioPath) {
     File audio = ResourceUtils.getFile("classpath:" + audioPath);
     InputFile inputAudio = new InputFile(audio);
     SendAudio sendAudio = new SendAudio();
     sendAudio.setAudio(inputAudio);
     sendAudio.setChatId(chatId);
-    sendAudio.setCaption(caption);
+
     execute(sendAudio);
   }
 
   @SneakyThrows
-  public void sendPhoto(String chatId, String imageCaption, String imagePath) {
+  public void sendPhoto(String chatId, String imagePath) {
     File image = ResourceUtils.getFile("classpath:" + imagePath);
     InputFile inputImage = new InputFile(image);
     SendPhoto sendPhoto = new SendPhoto();
     sendPhoto.setPhoto(inputImage);
     sendPhoto.setChatId(chatId);
-    sendPhoto.setCaption(imageCaption);
 
     execute(sendPhoto);
   }
