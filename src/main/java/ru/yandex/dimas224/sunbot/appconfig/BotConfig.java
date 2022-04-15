@@ -1,31 +1,35 @@
 package ru.yandex.dimas224.sunbot.appconfig;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
+import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
 import ru.yandex.dimas224.sunbot.SunBot;
 import ru.yandex.dimas224.sunbot.botapi.TelegramFacade;
 
 @Setter
 @Getter
 @Configuration
-@ConfigurationProperties(prefix = "telegrambot")
+@AllArgsConstructor
 public class BotConfig {
-  private String webHookPath;
-  private String botUserName;
-  private String botToken;
+  private final TelegramConfig telegramConfig;
+
+  @Bean
+  public SetWebhook setWebhookInstance() {
+    return SetWebhook.builder().url(telegramConfig.getWebhookPath()).build();
+  }
 
   @Bean
   public SunBot getSunBot(TelegramFacade telegramFacade) {
     SunBot sunBot = new SunBot(new DefaultBotOptions(), telegramFacade);
-    sunBot.setBotUserName(botUserName);
-    sunBot.setBotToken(botUserName);
-    sunBot.setWebHookPath(botUserName);
+    sunBot.setBotUserName(telegramConfig.getBotName());
+    sunBot.setBotToken(telegramConfig.getBotToken());
+    sunBot.setWebHookPath(telegramConfig.getWebhookPath());
 
     return sunBot;
   }
