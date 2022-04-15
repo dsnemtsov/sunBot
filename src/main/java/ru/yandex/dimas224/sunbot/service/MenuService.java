@@ -66,11 +66,14 @@ public class MenuService {
     InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
     InlineKeyboardButton intervals = new InlineKeyboardButton("Интервалы");
+    InlineKeyboardButton scales = new InlineKeyboardButton("Гаммы");
 
     intervals.setCallbackData("intervals");
+    scales.setCallbackData("scales");
 
     List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
     keyboardButtonsRow1.add(intervals);
+    keyboardButtonsRow1.add(scales);
 
     List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
     rowList.add(keyboardButtonsRow1);

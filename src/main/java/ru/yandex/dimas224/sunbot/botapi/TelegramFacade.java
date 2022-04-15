@@ -32,7 +32,7 @@ public class TelegramFacade {
     this.sunBot = sunBot;
 
     menu.put("/members", this::getMembers);
-    menu.put("/scales", this::getScales);
+    //menu.put("/scales", this::getScales);
     menu.put("/data", this::getTheoryData);
     menu.put("/card_number", message -> messagesService.getReplyMessage(message.getChatId().toString(), "reply.cardNumber"));
     menu.put("/concert", message -> messagesService.getReplyMessage(message.getChatId().toString(), "reply.concertInfo"));
@@ -81,6 +81,10 @@ public class TelegramFacade {
       sunBot.sendAudio(chatId, "static/audio/liamin.mp3");
     } else if (buttonQuery.getData().equals("intervals")) {
       sunBot.sendPhoto(chatId, "static/image/intervals.jpg");
+    } else if (buttonQuery.getData().equals("scales")) {
+      SendMessage replyMessage = messagesService.getReplyMessage(chatId, "reply.scales");
+      replyMessage.setReplyMarkup(menuService.getScales());
+      return replyMessage;
     }
     return callbacks.getOrDefault(buttonQuery.getData(), a -> (new SendMessage())).apply(chatId);
   }
