@@ -46,7 +46,6 @@ public class TelegramFacade {
     callbacks.put("razminka", chatId -> messagesService.getReplyMessage(chatId, "reply.razminka"));
     callbacks.put("scales", this::getScales);
     callbacks.put("texts", this::getTexts);
-    //callbacks.put("dream", );
   }
 
   @SneakyThrows
