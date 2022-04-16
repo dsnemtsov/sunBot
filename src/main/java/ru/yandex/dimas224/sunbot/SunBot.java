@@ -71,7 +71,7 @@ public class SunBot extends TelegramWebhookBot {
 
   @SneakyThrows
   public void sendPhoto(String chatId, String imagePath) {
-    Path filePath = Path.of("src/main/resources/static/image/" + imagePath);
+    Path filePath = Path.of("src/main/resources/static/" + imagePath);
     File image = filePath.toFile();
     //File image = ResourceUtils.getFile("classpath:" + imagePath);
     InputFile inputImage = new InputFile(image);

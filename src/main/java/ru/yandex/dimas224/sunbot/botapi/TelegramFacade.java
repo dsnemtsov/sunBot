@@ -87,13 +87,13 @@ public class TelegramFacade {
   private BotApiMethod<?> processCallbackQuery(CallbackQuery buttonQuery) {
     final String chatId = buttonQuery.getMessage().getChatId().toString();
     if (buttonQuery.getData().equals("doMajor")) {
-      sunBot.sendPhoto(chatId, "static/image/domaj.jpg");
-      sunBot.sendAudio(chatId, "static/audio/domaj.mp3");
+      sunBot.sendPhoto(chatId, "image/domaj.jpg");
+      sunBot.sendAudio(chatId, "audio/domaj.mp3");
     } else if (buttonQuery.getData().equals("liaMinor")) {
-      sunBot.sendPhoto(chatId, "static/image/liamin.jpg");
-      sunBot.sendAudio(chatId, "static/audio/liamin.mp3");
+      sunBot.sendPhoto(chatId, "image/liamin.jpg");
+      sunBot.sendAudio(chatId, "audio/liamin.mp3");
     } else if (buttonQuery.getData().equals("intervals")) {
-      sunBot.sendPhoto(chatId, "static/image/intervals.jpg");
+      sunBot.sendPhoto(chatId, "image/intervals.jpg");
     } else if (buttonQuery.getData().equals("dream")) {
       return getSongText(chatId, "Dream.txt");
     }
