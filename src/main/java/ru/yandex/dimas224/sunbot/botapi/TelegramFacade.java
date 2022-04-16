@@ -49,8 +49,8 @@ public class TelegramFacade {
   }
 
   @SneakyThrows
-  private SendMessage getSongText(String chatId, String s) {
-    Path filePath = Path.of("src/main/resources/static/text/" + s);
+  private SendMessage getSongText(String chatId, String songName) {
+    Path filePath = Path.of("src/main/resources/static/text/" + songName);
 
     String content = Files.readString(filePath);
 

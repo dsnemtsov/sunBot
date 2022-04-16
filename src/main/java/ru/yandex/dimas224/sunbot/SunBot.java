@@ -1,6 +1,7 @@
 package ru.yandex.dimas224.sunbot;
 
 import java.io.File;
+import java.nio.file.Path;
 import lombok.SneakyThrows;
 import org.springframework.util.ResourceUtils;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
@@ -70,7 +71,9 @@ public class SunBot extends TelegramWebhookBot {
 
   @SneakyThrows
   public void sendPhoto(String chatId, String imagePath) {
-    File image = ResourceUtils.getFile("classpath:" + imagePath);
+    Path filePath = Path.of("src/main/resources/static/image/" + imagePath);
+    File image = filePath.toFile();
+    //File image = ResourceUtils.getFile("classpath:" + imagePath);
     InputFile inputImage = new InputFile(image);
     SendPhoto sendPhoto = new SendPhoto();
     sendPhoto.setPhoto(inputImage);
