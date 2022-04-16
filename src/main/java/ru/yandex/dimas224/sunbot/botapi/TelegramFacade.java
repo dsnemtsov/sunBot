@@ -34,9 +34,13 @@ public class TelegramFacade {
     this.sunBot = sunBot;
 
     menu.put("/members", this::getMembers);
+    menu.put("/members@via_sun_bot", this::getMembers);
     menu.put("/data", this::getTheoryData);
+    menu.put("/data@via_sun_bot", this::getTheoryData);
     menu.put("/card_number", message -> messagesService.getReplyMessage(message.getChatId().toString(), "reply.cardNumber"));
+    menu.put("/card_number@via_sun_bot", message -> messagesService.getReplyMessage(message.getChatId().toString(), "reply.cardNumber"));
     menu.put("/concert", message -> messagesService.getReplyMessage(message.getChatId().toString(), "reply.concertInfo"));
+    menu.put("/concert@via_sun_bot", message -> messagesService.getReplyMessage(message.getChatId().toString(), "reply.concertInfo"));
 
     callbacks.put("liza", chatId -> messagesService.getReplyMessage(chatId, "reply.liza"));
     callbacks.put("lena", chatId -> messagesService.getReplyMessage(chatId, "reply.lena"));
