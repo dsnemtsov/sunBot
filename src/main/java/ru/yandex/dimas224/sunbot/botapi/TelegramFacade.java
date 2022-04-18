@@ -100,6 +100,10 @@ public class TelegramFacade {
       sunBot.sendPhoto(chatId, "image/intervals.jpg");
     } else if (buttonQuery.getData().equals("dream")) {
       return getSongText(chatId, "Dream.txt");
+    } else if (buttonQuery.getData().equals("all")) {
+      return getSongText(chatId, "ThatsAll.txt");
+    } else if (buttonQuery.getData().equals("poplars")) {
+      return getSongText(chatId, "Poplars.txt");
     }
 
     return callbacks.getOrDefault(buttonQuery.getData(), a -> (new SendMessage())).apply(chatId);

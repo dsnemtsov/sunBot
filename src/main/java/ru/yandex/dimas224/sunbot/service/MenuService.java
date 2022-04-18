@@ -66,11 +66,17 @@ public class MenuService {
     InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
     InlineKeyboardButton dream = new InlineKeyboardButton("Dream");
+    InlineKeyboardButton thatsAll = new InlineKeyboardButton("Это всё");
+    InlineKeyboardButton poplars = new InlineKeyboardButton("Тополя");
 
     dream.setCallbackData("dream");
+    thatsAll.setCallbackData("all");
+    poplars.setCallbackData("poplars");
 
     List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
     keyboardButtonsRow1.add(dream);
+    keyboardButtonsRow1.add(thatsAll);
+    keyboardButtonsRow1.add(poplars);
 
     List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
     rowList.add(keyboardButtonsRow1);
