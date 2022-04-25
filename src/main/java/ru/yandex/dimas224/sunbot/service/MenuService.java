@@ -46,16 +46,25 @@ public class MenuService {
 
     InlineKeyboardButton doMajor = new InlineKeyboardButton("До-мажор");
     InlineKeyboardButton liaMinor = new InlineKeyboardButton("Ля-минор");
+    InlineKeyboardButton reMinor = new InlineKeyboardButton("Рэ-минор");
+    InlineKeyboardButton faMajor = new InlineKeyboardButton("Фа-мажор");
 
     doMajor.setCallbackData("doMajor");
     liaMinor.setCallbackData("liaMinor");
+    reMinor.setCallbackData("reMinor");
+    faMajor.setCallbackData("faMajor");
 
     List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
     keyboardButtonsRow1.add(doMajor);
     keyboardButtonsRow1.add(liaMinor);
 
+    List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList<>();
+    keyboardButtonsRow1.add(reMinor);
+    keyboardButtonsRow1.add(faMajor);
+
     List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
     rowList.add(keyboardButtonsRow1);
+    rowList.add(keyboardButtonsRow2);
 
     inlineKeyboardMarkup.setKeyboard(rowList);
 

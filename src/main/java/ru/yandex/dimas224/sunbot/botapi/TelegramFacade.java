@@ -96,6 +96,10 @@ public class TelegramFacade {
     } else if (buttonQuery.getData().equals("liaMinor")) {
       sunBot.sendPhoto(chatId, "image/liamin.jpg");
       sunBot.sendAudio(chatId, "audio/liamin.mp3");
+    } else if (buttonQuery.getData().equals("reMinor")) {
+      sunBot.sendVideo(chatId, "video/re_minor.mov");
+    } else if (buttonQuery.getData().equals("faMajor")) {
+      sunBot.sendVideo(chatId, "video/fa_major.mov");
     } else if (buttonQuery.getData().equals("intervals")) {
       sunBot.sendPhoto(chatId, "image/intervals.jpg");
     } else if (buttonQuery.getData().equals("dream")) {

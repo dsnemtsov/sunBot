@@ -8,6 +8,7 @@ import org.telegram.telegrambots.bots.TelegramWebhookBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendAudio;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.methods.send.SendVideo;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.yandex.dimas224.sunbot.botapi.TelegramFacade;
@@ -77,5 +78,17 @@ public class SunBot extends TelegramWebhookBot {
     sendPhoto.setChatId(chatId);
 
     execute(sendPhoto);
+  }
+
+  @SneakyThrows
+  public void sendVideo(String chatId, String videoPath) {
+    Path filePath = Path.of("src/main/resources/static/" + videoPath);
+    File video = filePath.toFile();
+    InputFile inputVideo = new InputFile(video);
+    SendVideo sendVideo = new SendVideo();
+    sendVideo.setVideo(inputVideo);
+    sendVideo.setChatId(chatId);
+
+    execute(sendVideo);
   }
 }
